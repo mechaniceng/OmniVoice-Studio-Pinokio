@@ -5,12 +5,16 @@ module.exports = {
     {
       method: "shell.run",
       params: {
-        path: "app",
         env: {
           PYTHONUNBUFFERED: "1",
           HF_HUB_ENABLE_HF_TRANSFER: "1",
+          TORCH_COMPILE_DISABLE: "1",
+          PYTHONPATH: "TTS-Engines/CosyVoice",
+          TRANSLATE_BASE_URL: "http://localhost:11434/v1"
         },
-        message: "uv run uvicorn main:app --app-dir backend --host 127.0.0.1 --port 3900",
+        venv: ".venv",
+        path: "app",
+        message: "python -m uvicorn main:app --app-dir backend --host 127.0.0.1 --port 3900",
         on: [{
           event: "/Application startup complete|Uvicorn running on/i",
           done: true,

@@ -1,6 +1,13 @@
 module.exports = {
   run: [
-    // Pull the latest changes from GitHub
+    // Update pinokio scripts 
+    {
+      method: "shell.run",
+      params: {
+        message: "git pull",
+      },
+    },
+    // Update Omnivoice
     {
       method: "shell.run",
       params: {

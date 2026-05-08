@@ -94,7 +94,7 @@ module.exports = {
       params: {
         path: "app",
         message: [
-          "uv pip install -r ../requirements_cv.txt --index-strategy unsafe-best-match"
+          "uv pip install -r ../requirements_cv.txt --index-strategy unsafe-best-match --no-build-isolation"
         ]
       },
     },

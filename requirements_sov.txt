@@ -1,0 +1,28 @@
+budoux==0.8.1
+certifi==2026.4.22
+chardet
+charset-normalizer==3.4.7
+cn2an
+fasttext-predict==0.9.2.4
+fast_langdetect==1.0.1
+ffmpeg-python 
+g2pk2
+g2p_en
+idna==3.13
+jieba_fast
+ko_pron
+opencc; sys_platform != 'linux'
+opencc==1.1.1; sys_platform == 'linux'
+peft
+proces==0.1.7
+pypinyin
+pyopenjtalk>=0.4.1
+python_mecab_ko; sys_platform != 'win32'
+requests==2.33.1
+robust-downloader==0.0.2
+rotary_embedding_torch
+split-lang
+ToJyutping
+tqdm
+urllib3==2.7.0
+wordsegment

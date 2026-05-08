@@ -5,7 +5,7 @@ module.exports = {
       when: "{{!exists('app')}}",
       method: "shell.run",
       params: {
-        message: "git clone https://github.com/debpalash/OmniVoice-Studio app",
+        message: "git clone https://github.com/6Morpheus6/OmniVoice-Studio app",
       },
     },
     // Clone the MOSS-TTS-Nano repository into the TTS-Engines directory
@@ -30,6 +30,14 @@ module.exports = {
       params: {
         path: "app/TTS-Engines/CosyVoice",
         message: "git submodule update --init --recursive",
+      },
+    },
+    // Clone the GPT-SoVITS repository into the TTS-Engines directory
+    {
+      method: "shell.run",
+      params: {
+        path: "app",
+        message: "git clone https://github.com/RVC-Boss/GPT-SoVITS TTS-Engines/GPT-SoVITS",
       },
     },
 /*     // Clone the index-tts repository into the TTS-Engines directory
@@ -80,6 +88,7 @@ module.exports = {
         ]
       },
     }, */
+    // Install additional Python dependencies for CosyVoice
     {
       method: "shell.run",
       params: {
@@ -89,6 +98,53 @@ module.exports = {
         ]
       },
     },
+    // Install additional Python dependencies for CosyVoice
+    {
+      method: "shell.run",
+      params: {
+        path: "app",
+        message: [
+          "uv pip install -r ../requirements_sov.txt"
+        ]
+      },
+    },
+    {
+      when: "{{platform === 'darwin' && arch === 'arm64'}}",
+      method: "shell.run",
+      params: {
+        path: "app",
+        message: [
+          "uv pip mlx-audio"
+        ]
+      },
+    },
+    // Download GPT-SoVITS pretrained models from Hugging Face
+    {
+      method: "hf.download",
+      params: {
+        path: "app/TTS-Engines/GPT-SoVITS/GPT_SoVITS",
+        "_": [ "lj1995/GPT-SoVITS" ],
+        "local-dir": "pretrained_models"
+      },
+    },
+    // Download UVR5 weights from Hugging Face
+    {
+      method: "shell.run",
+      params: {
+        path: "app/TTS-Engines/GPT-SoVITS/tools/uvr5",
+        message: 'hf download lj1995/VoiceConversionWebUI --include="uvr5_weights/*" --local-dir=uvr5_weights && dir'
+      },
+    },
+    // Download G2P models from Hugging Face
+    {
+      method: "hf.download",
+      params: {
+        path: "app/TTS-Engines/GPT-SoVITS/GPT_SoVITS/text",
+        "_": [ "IQ-Technology/G2PWModel" ],
+        "local-dir": "G2WModel"
+      },
+    },
+    // Install SOX and libaio dependencies
     {
       when: "{{which('apt')}}",
       method: "shell.run",

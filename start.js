@@ -1,4 +1,7 @@
 module.exports = {
+  requires: {
+    bundle: "ai"
+  },
   daemon: true,
   run: [
     // Step 1: Start the FastAPI backend on port 3900

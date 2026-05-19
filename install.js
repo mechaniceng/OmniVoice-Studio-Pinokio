@@ -13,6 +13,7 @@ module.exports = {
     },
     // Clone the MOSS-TTS-Nano repository into the TTS-Engines directory
     {
+      when: "{{!exists('app/TTS-Engines/MOSS-TTS-Nano')}}",
       method: "shell.run",
       params: {
         path: "app",
@@ -21,6 +22,7 @@ module.exports = {
     },
     // Clone the CosyVoice repository into the TTS-Engines directory
     {
+      when: "{{!exists('app/TTS-Engines/CosyVoice')}}",
       method: "shell.run",
       params: {
         path: "app",
@@ -29,6 +31,7 @@ module.exports = {
     },
     // Update CosyVoice submodule
     {
+      when: "{{exists('app/TTS-Engines/CosyVoice')}}",
       method: "shell.run",
       params: {
         path: "app/TTS-Engines/CosyVoice",
@@ -37,6 +40,7 @@ module.exports = {
     },
     // Clone the GPT-SoVITS repository into the TTS-Engines directory
     {
+      when: "{{!exists('app/TTS-Engines/GPT-SoVITS')}}",
       method: "shell.run",
       params: {
         path: "app",
@@ -68,7 +72,7 @@ module.exports = {
         path: "app",
         message: [
           "uv sync",
-          "uv pip install voxcpm openai sherpa-onnx wheel setuptools==80.9.0"
+          "uv pip install voxcpm openai sherpa-onnx wheel wheel_stub setuptools==80.9.0"
         ]
       },
     },

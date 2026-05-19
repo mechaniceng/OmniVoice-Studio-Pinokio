@@ -47,6 +47,8 @@ transformers_cache/
 
 # Audio Files & Outputs
 outputs/
+voices/
+dub_jobs/
 *.wav
 *.mp3
 *.flac

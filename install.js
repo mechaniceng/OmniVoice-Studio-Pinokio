@@ -139,7 +139,7 @@ module.exports = {
       method: "shell.run",
       params: {
         path: "app",
-        message: "uv pip install setuptools==65.5.0"
+        message: "uv pip install setuptools==65.5.0 ctranslate2==4.6.0"
       },
     },
     // Download GPT-SoVITS pretrained models from Hugging Face

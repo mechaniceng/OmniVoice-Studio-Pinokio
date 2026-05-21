@@ -72,7 +72,7 @@ module.exports = {
         path: "app",
         message: [
           "uv sync",
-          "uv pip install voxcpm openai sherpa-onnx wheel wheel_stub setuptools==80.9.0"
+          "uv pip install voxcpm openai sherpa-onnx wheel wheel_stub setuptools==65.5.0"
         ]
       },
     },

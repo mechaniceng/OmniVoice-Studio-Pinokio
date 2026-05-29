@@ -131,7 +131,7 @@ module.exports = {
       params: {
         path: "app",
         message: [
-          "uv pip mlx-audio"
+          "uv pip install mlx-audio"
         ]
       },
     },

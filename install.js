@@ -165,7 +165,7 @@ module.exports = {
       params: {
         path: "app/TTS-Engines/GPT-SoVITS/GPT_SoVITS/text",
         "_": [ "IQ-Technology/G2PWModel" ],
-        "local-dir": "G2WModel"
+        "local-dir": "G2PWModel "
       },
     },
     // Install SOX and libaio dependencies

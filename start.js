@@ -32,7 +32,7 @@ module.exports = {
         path: "app/TTS-Engines/GPT-SoVITS",
         message: "python api_v2.py -a 127.0.0.1 -p 9880 -c GPT_SoVITS/configs/tts_infer.yaml",
         on: [{
-          event: "/(http:\\/\\/\\S+)/",
+          event: "/Uvicorn running on|Application startup complete/i",
           done: true,
         }],
       },

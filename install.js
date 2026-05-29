@@ -69,6 +69,7 @@ module.exports = {
     {
       method: "shell.run",
       params: {
+        venv: ".venv",
         path: "app",
         message: [
           "uv sync",
@@ -80,6 +81,7 @@ module.exports = {
     {
       method: "shell.run",
       params: {
+        venv: "../../.venv",
         path: "app/TTS-Engines/MOSS-TTS-Nano",
         message: [
           "uv pip install -e . --no-deps"
@@ -100,6 +102,7 @@ module.exports = {
       when: "{{gpu === 'nvidia' && platform === 'linux'}}",
       method: "shell.run",
       params: {
+        venv: ".venv",
         path: "app",
         message: [
           "uv pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu128 --force-reinstall"
@@ -110,6 +113,7 @@ module.exports = {
     {
       method: "shell.run",
       params: {
+        venv: ".venv",
         path: "app",
         message: [
           "uv pip install -r ../requirements_cv.txt --index-strategy unsafe-best-match --no-build-isolation"
@@ -120,6 +124,7 @@ module.exports = {
     {
       method: "shell.run",
       params: {
+        venv: ".venv",
         path: "app",
         message: [
           "uv pip install -r ../requirements_sov.txt"
@@ -131,6 +136,7 @@ module.exports = {
       when: "{{platform === 'darwin' && arch === 'arm64'}}",
       method: "shell.run",
       params: {
+        venv: ".venv",
         path: "app",
         message: [
           "uv pip install mlx-audio"
@@ -141,6 +147,7 @@ module.exports = {
     {
       method: "shell.run",
       params: {
+        venv: ".venv",
         path: "app",
         message: "uv pip install setuptools==65.5.0 ctranslate2==4.6.0 argostranslate"
       },

@@ -14,6 +14,38 @@ module.exports = {
         path: "app",
         message: "git pull",
       },
-    }
+    },
+    // Update MOSS-TTS-Nano
+    {
+      method: "shell.run",
+      params: {
+        path: "app/TTS-Engines/MOSS-TTS-Nano",
+        message: "git pull",
+      },
+    },
+    // Update CosyVoice
+    {
+      method: "shell.run",
+      params: {
+        path: "app/TTS-Engines/CosyVoice",
+        message: "git pull",
+      },
+    },
+    // Update CosyVoice submodules
+    {
+      method: "shell.run",
+      params: {
+        path: "app/TTS-Engines/CosyVoice",
+        message: "git submodule update --init --recursive",
+      },
+    },
+    // Update GPT-SoVITS
+    {
+      method: "shell.run",
+      params: {
+        path: "app/TTS-Engines/GPT-SoVITS",
+        message: "git pull",
+      },
+    },
   ]
 }

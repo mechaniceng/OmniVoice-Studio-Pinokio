@@ -76,6 +76,7 @@ module.exports = {
         ]
       },
     },
+    // Install MOSS-TTS-Nano dependencies
     {
       method: "shell.run",
       params: {
@@ -105,7 +106,7 @@ module.exports = {
         ]
       },
     },
-    // Install additional Python dependencies for CosyVoice
+    // Install CosyVoice dependencies
     {
       method: "shell.run",
       params: {
@@ -115,7 +116,7 @@ module.exports = {
         ]
       },
     },
-    // Install additional Python dependencies for CosyVoice
+    // Install GPT-SoVITS dependencies
     {
       method: "shell.run",
       params: {
@@ -125,6 +126,7 @@ module.exports = {
         ]
       },
     },
+    // Install mlx-audio for Macs
     {
       when: "{{platform === 'darwin' && arch === 'arm64'}}",
       method: "shell.run",
@@ -135,6 +137,7 @@ module.exports = {
         ]
       },
     },
+    //faster-whisper fix and argotranslate for local translation
     {
       method: "shell.run",
       params: {

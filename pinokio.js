@@ -1,8 +1,5 @@
 module.exports = {
   version: "5.0",
-  title: "OmniVoice Studio",
-  description: "The open-source ElevenLabs alternative. Local voice cloning, video dubbing, and real-time dictation — 646 languages, no API keys.",
-  icon: "icon.png",
   menu: async (kernel, info) => {
     let installed = info.exists("app/.venv")
     let running = {

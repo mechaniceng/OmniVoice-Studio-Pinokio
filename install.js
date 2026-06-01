@@ -163,10 +163,12 @@ module.exports = {
     },
     // Download UVR5 weights from Hugging Face
     {
-      method: "shell.run",
+      method: "hf.download",
       params: {
         path: "app/TTS-Engines/GPT-SoVITS/tools/uvr5",
-        message: 'hf download lj1995/VoiceConversionWebUI --include="uvr5_weights/*" --local-dir=uvr5_weights && dir'
+        "_": [ "lj1995/VoiceConversionWebUI" ],
+        "include": "uvr5_weights/*",
+        "local-dir": "uvr5_weights"
       },
     },
     // Download G2P models from Hugging Face
@@ -186,7 +188,7 @@ module.exports = {
         sudo: true,
         message: "apt-get install -y libaio-dev sox libsox-fmt-all"
       },
-      next: 'end'
+      next: null
     },
     {
       when: "{{which('yum')}}",
@@ -195,7 +197,15 @@ module.exports = {
         sudo: true,
         message: "yum install -y libaio-devel sox"
       },
-      next: 'end'
+      next: null
+    },
+    {
+      when: "{{platform === 'darwin'}}",
+      method: "shell.run",
+      params: {
+        message: "conda install -y -c conda-forge sox"
+      },
+      next: null
     },
     {
       when: "{{which('winget')}}",

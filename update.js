@@ -23,6 +23,15 @@ module.exports = {
         message: "git pull",
       },
     },
+    // Re-run editable install to pick up any upstream MOSS-TTS-Nano changes
+    {
+      method: "shell.run",
+      params: {
+        venv: "../../.venv",
+        path: "app/TTS-Engines/MOSS-TTS-Nano",
+        message: "uv pip install -e . --no-deps",
+      },
+    },
     // Update CosyVoice
     {
       method: "shell.run",

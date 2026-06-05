@@ -48,7 +48,10 @@ module.exports = {
       },
     },
 /*     // Clone the index-tts repository into the TTS-Engines directory
+    // DISABLED: IndexTTS2 requires transformers<5 but OmniVoice needs transformers>=5.3
+    // This creates a dependency conflict. Use CosyVoice instead for emotion control.
     {
+      when: "{{!exists('app/TTS-Engines/index-tts')}}",
       method: "shell.run",
       params: {
         env: { GIT_LFS_SKIP_SMUDGE: "1" },
@@ -88,18 +91,32 @@ module.exports = {
         ]
       },
     },
-/*     {
+/*     // Install IndexTTS2 dependencies
+    // DISABLED: Dependency conflict with OmniVoice (transformers version)
+    {
+      when: "{{exists('app/TTS-Engines/index-tts')}}",
       method: "shell.run",
       params: {
-        env: { UV_PYTHON: "3.11" },
+        venv: "../../.venv",
         path: "app/TTS-Engines/index-tts",
         message: [
-          "uv pip install -e ."
+          "uv pip install -e . --no-deps"
         ]
       },
     }, */
     {
       when: "{{gpu === 'nvidia' && platform === 'linux'}}",
+      method: "shell.run",
+      params: {
+        venv: ".venv",
+        path: "app",
+        message: [
+          "uv pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu128 --force-reinstall"
+        ]
+      },
+    },
+    {
+      when: "{{gpu === 'nvidia' && platform === 'win32'}}",
       method: "shell.run",
       params: {
         venv: ".venv",
@@ -117,6 +134,18 @@ module.exports = {
         path: "app",
         message: [
           "uv pip install -r ../requirements_cv.txt --index-strategy unsafe-best-match --no-build-isolation"
+        ]
+      },
+    },
+    // Install CosyVoice package from cloned repository
+    {
+      when: "{{exists('app/TTS-Engines/CosyVoice')}}",
+      method: "shell.run",
+      params: {
+        venv: "../../.venv",
+        path: "app/TTS-Engines/CosyVoice",
+        message: [
+          "uv pip install -e . --no-deps"
         ]
       },
     },
@@ -178,6 +207,27 @@ module.exports = {
         path: "app/TTS-Engines/GPT-SoVITS/GPT_SoVITS/text",
         "_": [ "IQ-Technology/G2PWModel" ],
         "local-dir": "G2PWModel"
+      },
+    },
+/*     // Download IndexTTS2 pretrained models from Hugging Face
+    // DISABLED: Dependency conflict with OmniVoice (transformers version)
+    {
+      when: "{{exists('app/TTS-Engines/index-tts')}}",
+      method: "hf.download",
+      params: {
+        path: "app/TTS-Engines/index-tts",
+        "_": [ "IndexTeam/IndexTTS-2" ],
+        "local-dir": "checkpoints"
+      },
+    }, */
+    // Download CosyVoice3 pretrained models from Hugging Face
+    {
+      when: "{{exists('app/TTS-Engines/CosyVoice')}}",
+      method: "hf.download",
+      params: {
+        path: "app/TTS-Engines/CosyVoice",
+        "_": [ "FunAudioLLM/CosyVoice3-0.5B" ],
+        "local-dir": "pretrained_models/Fun-CosyVoice3-0.5B"
       },
     },
     // Install SOX and libaio dependencies

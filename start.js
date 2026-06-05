@@ -4,7 +4,7 @@ module.exports = {
   },
   daemon: true,
   run: [
-    // Step 1: Start the FastAPI backend on port 3900
+    // Step 1: Start the FastAPI backend on port 3910
     {
       method: "shell.run",
       params: {
@@ -14,23 +14,24 @@ module.exports = {
           TORCH_COMPILE_DISABLE: "1",
           PYTHONPATH: "TTS-Engines/CosyVoice",
           TRANSLATE_BASE_URL: "http://localhost:11434/v1",
-          OMNIVOICE_GPTSOVITS_URL: "http://127.0.0.1:9880"
+          OMNIVOICE_GPTSOVITS_URL: "http://127.0.0.1:9880",
+          OMNIVOICE_COSYVOICE_MODEL: "TTS-Engines/CosyVoice/pretrained_models/Fun-CosyVoice3-0.5B",
+          OMNIVOICE_DATA_DIR: "app/backend/omnivoice_data"
         },
-        venv: ".venv",
         path: "app",
-        message: "python -m uvicorn main:app --app-dir backend --host 127.0.0.1 --port 3900",
+        message: "G:/pinokio/envs/omnivoice/python.exe -m uvicorn main:app --app-dir backend --host 127.0.0.1 --port 3910",
         on: [{
           event: "/Application startup complete|Uvicorn running on/i",
           done: true,
         }],
       },
     },
+    // Step: Start the GPT-SoVITS TTS service
     {
       method: "shell.run",
       params: {
-        venv: "../../.venv",
         path: "app/TTS-Engines/GPT-SoVITS",
-        message: "python api_v2.py -a 127.0.0.1 -p 9880 -c GPT_SoVITS/configs/tts_infer.yaml",
+        message: "G:/pinokio/envs/omnivoice/python.exe api_v2.py -a 127.0.0.1 -p 9880 -c GPT_SoVITS/configs/tts_infer.yaml",
         on: [{
           event: "/Uvicorn running on|Application startup complete/i",
           done: true,
